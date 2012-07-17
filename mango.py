@@ -40,12 +40,12 @@ def download_mango(url, path):
             sys.exit(1)
 
 # Main function
-def main():
-    url = sys.argv[1] # Pardon my ignorance, but I use this because I have not come with a better solution yet
+def download_mango2(url, path=os.getcwd()):
+    url = str(url) # Pardon my ignorance, but I use this because I have not come with a better solution yet
     name = url.strip('/').split('/') # We split all the / from the name
     name = name[len(name)-2] # And we clean up the name
     chapter = int(url[-1:])
-    path = os.getcwd() + '\\' + '%s - chapter %d' % (name, chapter) # Path to save your animu
+    path = str(path) + '\\' + '%s - chapter %d' % (name, chapter) # Path to save your animu
 
     page = urllib2.urlopen(url).read() # We read the page
     soup = BeautifulSoup(page) # And we add it to the soup!
@@ -57,6 +57,3 @@ def main():
         l = l.get_text()
         url2 = url + str(l)
         download_mango(url2, path)
-
-if __name__ == '__main__':
-    main()
