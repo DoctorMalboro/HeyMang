@@ -1,11 +1,11 @@
-ManGet
+Hey Mang!
 ======
 
 ## The easiest way to download all your mangos ##
 
-ManGet is a free, open-source project that allows you to get your manga from your favourite sites. Right now is at beta stage and so many features are not yet implemented and many sites have not been covered yet.
+Hey Mang! is a free, open-source project that allows you to get your manga from your favourite sites.
 
-![ManGet Preview](https://github.com/DoctorMalboro/ManGet/raw/master/ManGet-preview01.png "ManGet Preview")
+![Hey Mang! Preview]("Hey Mang! Preview")
 
 ### Future features:
 * RSS downloads
@@ -19,11 +19,11 @@ ManGet is a free, open-source project that allows you to get your manga from you
 * E-Hentai
 _(More to add, just pull a request in the git)_
 
-Remember always to check the official git and to update the program as much as you can. Fork, pull requests and issue bugs, that always helps.
+Remember always to check the official git and to update the program as much as you can.
 
 ### Many thanks to:
-* Books authors such as: Learn Python the Hard Way, Python for begginers, Nettuts+, Python Docs, etc.
+* All the Python tutorials and the Python documentation that helps to make things easier.
 * The libraries I've used: BeautifulSoup and PyQt4.
-* 4chan, specially /a/ for the idea and /g/ for the feedback.
+* The /g/entlemen who help me to change the name.
 * StackOverflow for answering all of my questions.
-* Everyone who works and contributes to Python, a beautiful and excellent language!
+* Everyone who works and contributes to Python.
