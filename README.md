@@ -5,7 +5,7 @@ Hey Mang!
 
 Hey Mang! is a free, open-source project that allows you to get your manga from your favourite sites.
 
-![Hey Mang! Preview]("Hey Mang! Preview")
+![HeyMang!](https://github.com/DoctorMalboro/HeyMang/raw/master/HeyMang-preview.png "Hey Mang!")
 
 ### Future features:
 * RSS downloads
