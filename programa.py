@@ -24,10 +24,10 @@ class HelloWindow(QtGui.QMainWindow):
         exitOption.setShortcut('Ctrl+Q')
         exitOption.triggered.connect(QtGui.qApp.quit)
         # About option
-        aboutOption = QtGui.QAction(QtGui.QIcon('img/about-icon.png'), '&About ManGet', self)
+        aboutOption = QtGui.QAction(QtGui.QIcon('img/about-icon.png'), '&About Hey Mang!', self)
         aboutOption.triggered.connect(self.aboutManget)
         # License option
-        licenseOption = QtGui.QAction(QtGui.QIcon('img/license-icon.png'), '&ManGet License', self)
+        licenseOption = QtGui.QAction(QtGui.QIcon('img/license-icon.png'), '&Hey Mang! License', self)
         licenseOption.triggered.connect(self.MangetLicense)
 
         # Setting the menubar
@@ -59,8 +59,8 @@ class HelloWindow(QtGui.QMainWindow):
         QtCore.QObject.connect(self.linkButton, QtCore.SIGNAL('clicked()'), self.on_link_clicked)
 
         # Introductory text
-        self.text = u'ManGet v0.2 BETA'
-        self.text2 = u'ManGet is a small app that allows you to download manga from'
+        self.text = u'Hey Mang! v0.5 BETA'
+        self.text2 = u'Hey Mang! is a small app that allows you to download manga from'
         self.text3 = u'mangareader.net (more to come). This app is in beta stage and all updates'
         self.text4 = u'will be posted in the official github repository, so stay tuned!'
 
@@ -75,8 +75,8 @@ class HelloWindow(QtGui.QMainWindow):
         centralWidget.setLayout(grid)
         self.setCentralWidget(centralWidget)
 
-        self.setGeometry(300, 300, 500, 250) # position-x, position-y, width, height
-        self.setWindowTitle('ManGet v0.2 BETA') # Title
+        self.setGeometry(300, 300, 600, 250) # position-x, position-y, width, height
+        self.setWindowTitle('Hey Mang! v0.5 BETA') # Title
         self.setWindowIcon(QtGui.QIcon('img/manga-icon.png')) # Icon
 
     def paintEvent(self, event):
@@ -103,7 +103,7 @@ class HelloWindow(QtGui.QMainWindow):
     # My idea and how I will develop it
     def aboutManget(self):
         about = QtGui.QMessageBox(self)
-        about.about(self, 'About ManGet', """ManGet is a free, open-source project that allows you to get your manga from your favourite sites. Right now is at beta stage and so many features are not yet implemented and many sites have not been covered yet.
+        about.about(self, 'About Hey Mang!', """Hey Mang! is a free, open-source project that allows you to get your manga from your favourite sites. Right now is at beta stage and so many features are not yet implemented and many sites have not been covered yet.
 
 Future features:
     *RSS downloads
@@ -122,14 +122,14 @@ Remember always to check the official git and to update the program as much as y
 Many thanks to:
     *Books authors such as: Learn Python the Hard Way, Python for begginers, Nettuts+, Python Docs, etc.
     *The libraries I've used: BeautifulSoup and PyQt4.
-    *4chan, specially /a/ for the idea and /g/ for the feedback.
+    *The /g/entlemen who help me to change the name.
     *StackOverflow for answering all of my questions.
     *Everyone who works and contributes to Python, a beautiful and excellent language!""")
 
     # Free as in BSD free
     def MangetLicense(self):
         license = QtGui.QMessageBox(self)
-        license.setWindowTitle('ManGet License')
+        license.setWindowTitle('Hey Mang! License')
         license.setText("""
 Copyright (c) 2012, Leandro Poblet
 All rights reserved.
