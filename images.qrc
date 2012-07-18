@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="/" >
+    <file>img/folder-icon.png</file>
+    <file>img/exit-icon.png</file>
+    <file>img/about-icon.png</file>
+    <file>img/license-icon.png</file>
+    <file>img/manga-icon.png</file>
+  </qresource>
+</RCC>
