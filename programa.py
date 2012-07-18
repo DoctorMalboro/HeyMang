@@ -1,6 +1,7 @@
 import PyQt4
 import sys
 import mango
+import images_rc
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from mango import download_mango2
@@ -16,18 +17,18 @@ class HelloWindow(QtGui.QMainWindow):
 
         # Menubar function
         # Change path option
-        changePath = QtGui.QAction(QtGui.QIcon('img/folder-icon.png'), '&Change folder', self)
+        changePath = QtGui.QAction(QtGui.QIcon(':/img/folder-icon.png'), '&Change folder', self)
         changePath.setShortcut('Ctrl+P')
         changePath.triggered.connect(self.browseDir)
         # Exit option
-        exitOption = QtGui.QAction(QtGui.QIcon('img/exit-icon.png'), '&Exit', self)
+        exitOption = QtGui.QAction(QtGui.QIcon(':/img/exit-icon.png'), '&Exit', self)
         exitOption.setShortcut('Ctrl+Q')
         exitOption.triggered.connect(QtGui.qApp.quit)
         # About option
-        aboutOption = QtGui.QAction(QtGui.QIcon('img/about-icon.png'), '&About Hey Mang!', self)
+        aboutOption = QtGui.QAction(QtGui.QIcon(':/img/about-icon.png'), '&About Hey Mang!', self)
         aboutOption.triggered.connect(self.aboutManget)
         # License option
-        licenseOption = QtGui.QAction(QtGui.QIcon('img/license-icon.png'), '&Hey Mang! License', self)
+        licenseOption = QtGui.QAction(QtGui.QIcon(':/img/license-icon.png'), '&Hey Mang! License', self)
         licenseOption.triggered.connect(self.MangetLicense)
 
         # Setting the menubar
@@ -39,61 +40,33 @@ class HelloWindow(QtGui.QMainWindow):
         helpMenu.addAction(aboutOption)
         helpMenu.addAction(licenseOption)
 
-        # Logo image
-        pic = QtGui.QPixmap('img/manga-icon.png')
-
-        lbl = QtGui.QLabel(self)
-        lbl.setPixmap(pic)
-
         self.label = QtGui.QLabel('MangaReader link:')
         self.linkEdit = QtGui.QLineEdit()
         self.linkButton = QtGui.QPushButton('Download')
         self.pathLabel = QtGui.QLabel('Saving path:')
         self.pathLabel.move(100, 100)
         self.pathEdit = QtGui.QFileDialog.getExistingDirectory(self, 'Select Directory')
-        self.path2 = str(self.pathEdit)
+        self.pathLabel2 = QtGui.QLabel(self.pathEdit)
 
         if not self.pathEdit:
             sys.exit(1)
 
         QtCore.QObject.connect(self.linkButton, QtCore.SIGNAL('clicked()'), self.on_link_clicked)
 
-        # Introductory text
-        self.text = u'Hey Mang! v0.5 BETA'
-        self.text2 = u'Hey Mang! is a small app that allows you to download manga from'
-        self.text3 = u'mangareader.net (more to come). This app is in beta stage and all updates'
-        self.text4 = u'will be posted in the official github repository, so stay tuned!'
-
         grid = QtGui.QGridLayout()
         grid.addWidget(self.label, 1, 0)
         grid.addWidget(self.linkEdit, 1, 1)
         grid.addWidget(self.linkButton, 1, 2)
         grid.addWidget(self.pathLabel, 2, 0)
-        grid.addWidget(lbl, 4, 0)
+        grid.addWidget(self.pathLabel2, 2, 1)
 
         centralWidget = QtGui.QWidget()
         centralWidget.setLayout(grid)
         self.setCentralWidget(centralWidget)
 
-        self.setGeometry(300, 300, 600, 250) # position-x, position-y, width, height
-        self.setWindowTitle('Hey Mang! v0.5 BETA') # Title
-        self.setWindowIcon(QtGui.QIcon('img/manga-icon.png')) # Icon
-
-    def paintEvent(self, event):
-        qp = QtGui.QPainter()
-        qp.begin(self)
-        self.drawText(event, qp)
-        qp.end()
-
-    def drawText(self, event, qp):
-        qp.setPen(QtGui.QColor(0, 0, 0))
-        qp.setFont(QtGui.QFont('Open Sans', 18))
-        qp.drawText(150, 140, self.text)    
-        qp.setFont(QtGui.QFont('Droid Sans', 9))
-        qp.drawText(150, 160, self.text2)   
-        qp.drawText(150, 170, self.text3)
-        qp.drawText(150, 180, self.text4)
-        qp.drawText(150, 85, self.path2)
+        self.setGeometry(300, 300, 600, 100) # position-x, position-y, width, height
+        self.setWindowTitle('Hey Mang! v0.6 BETA') # Title
+        self.setWindowIcon(QtGui.QIcon(':/img/manga-icon.png')) # Icon
 
     # This is complicated crap
     def browseDir(self):
@@ -115,12 +88,11 @@ Future sites:
     *Batoto
     *ExHentai
     *E-Hentai
-    (More to add, just pull a request in the git)
 
 Remember always to check the official git and to update the program as much as you can. Fork, pull requests and issue bugs, that always helps.
 
 Many thanks to:
-    *Books authors such as: Learn Python the Hard Way, Python for begginers, Nettuts+, Python Docs, etc.
+    *All the Python tutorials and the Python documentation that helps to make things easier.
     *The libraries I've used: BeautifulSoup and PyQt4.
     *The /g/entlemen who help me to change the name.
     *StackOverflow for answering all of my questions.
