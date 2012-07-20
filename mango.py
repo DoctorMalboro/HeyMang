@@ -15,9 +15,9 @@ def pathchange(old, new):
 # Download function
 def download_mango(url, path):   
 
-    pathchange(os.getcwd(), path) # We change the path of the image to be saved
+    if path != os.getcwd():
+        pathchange(os.getcwd(), path) # We change the path of the image to be saved
     urlContent = urllib2.urlopen(url).read() # We read the URL
-    s = int(url[-1:]) # Read the last number (page id)
     imgUrls = re.findall('img .*?src="(.*?)"', urlContent) # We read the mango
     
 
@@ -39,21 +39,49 @@ def download_mango(url, path):
             print "Unknown error. If this persists, contact the author or create a ticket in the bugtracker."
             sys.exit(1)
 
-# Main function
-def download_mango2(url, path=os.getcwd()):
-    url = str(url) # Pardon my ignorance, but I use this because I have not come with a better solution yet
-    name = url.strip('/').split('/') # We split all the / from the name
-    name = name[len(name)-2] # And we clean up the name
-    chapter = int(url[-1:])
-    path = str(path) + '\\' + '%s - chapter %d' % (name, chapter) # Path to save your animu
-
-    page = urllib2.urlopen(url).read() # We read the page
+def recognise_mangareader(link):
+    page = urllib2.urlopen(link).read() # We read the page
     soup = BeautifulSoup(page) # And we add it to the soup!
 
-    url = url + '/' # Little something to start downloading the pages!
+    link = link + '/' # Little something to start downloading the pages!
     
     soup = soup.findAll('option') # We select all the option tags
     for l in soup: # And we start with a loop
         l = l.get_text()
-        url2 = url + str(l)
+        url2 = link + str(l)
         download_mango(url2, path)
+
+def recognise_mangafox(link):
+    url = str(link)
+    url2 = re.findall('/([0-9]+).html', url)
+    page = urllib2.urlopen(url).read()
+
+    soup = BeautifulSoup(page)
+
+    soup = soup.findAll('option')
+    a = max(soup)
+    b = soup.index(a)
+    c = 0
+    while (c < b):
+        c = c + 1
+        d = re.sub('\d+.html', str(c), url)
+        d = d + '.html'
+        download_mango(d, os.getcwd())
+    
+
+# Main function
+def download_mango2(url, path, service):
+    url = str(url) # Pardon my ignorance, but I use this because I have not come with a better solution yet
+    name = url.strip('/').split('/') # We split all the / from the name
+    name = name[len(name)-2] # And we clean up the name
+    if service == "mangareader":
+        chapter = int(url[-1:])
+        print chapter
+    elif service == "mangafox":
+        a = re.findall('/c([0-9]+)/', url)
+        chapter = a[0]
+        print chapter
+    # path = str(path) + '\\' + '%s - chapter %d' % (name, chapter) # Path to save your animu
+
+    # if service == "mangareader":
+    #     recognise_mangareader(url)
