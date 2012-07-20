@@ -40,7 +40,7 @@ class HelloWindow(QtGui.QMainWindow):
         helpMenu.addAction(aboutOption)
         helpMenu.addAction(licenseOption)
 
-        self.label = QtGui.QLabel('MangaReader link:')
+        self.label = QtGui.QLabel('Manga link:')
         self.linkEdit = QtGui.QLineEdit()
         self.linkButton = QtGui.QPushButton('Download')
         self.pathLabel = QtGui.QLabel('Saving path:')
