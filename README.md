@@ -13,11 +13,11 @@ Hey Mang! is a free, open-source project that allows you to get your manga from 
 * Auto-update (only for stable branches)
 
 ### Future sites:
-* Mangafox
+* Mangafox **(Implemented on version 0.7 Beta)**
 * Batoto
 * ExHentai
 * E-Hentai
-_(More to add, just pull a request in the git)_
+_(More to add, just add an issue)_
 
 Remember always to check the official git and to update the program as much as you can.
 
