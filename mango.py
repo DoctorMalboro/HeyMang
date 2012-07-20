@@ -39,7 +39,7 @@ def download_mango(url, path):
             print "Unknown error. If this persists, contact the author or create a ticket in the bugtracker."
             sys.exit(1)
 
-def recognise_mangareader(link):
+def recognise_mangareader(link, path):
     page = urllib2.urlopen(link).read() # We read the page
     soup = BeautifulSoup(page) # And we add it to the soup!
 
@@ -51,7 +51,7 @@ def recognise_mangareader(link):
         url2 = link + str(l)
         download_mango(url2, path)
 
-def recognise_mangafox(link):
+def recognise_mangafox(link, path):
     url = str(link)
     url2 = re.findall('/([0-9]+).html', url)
     page = urllib2.urlopen(url).read()
@@ -66,22 +66,30 @@ def recognise_mangafox(link):
         c = c + 1
         d = re.sub('\d+.html', str(c), url)
         d = d + '.html'
-        download_mango(d, os.getcwd())
+        download_mango(d, path)
     
 
 # Main function
 def download_mango2(url, path, service):
-    url = str(url) # Pardon my ignorance, but I use this because I have not come with a better solution yet
-    name = url.strip('/').split('/') # We split all the / from the name
-    name = name[len(name)-2] # And we clean up the name
-    if service == "mangareader":
+    url = str(url)
+    if service == 'mangareader':
+        name = url.strip('/').split('/')
+        name = name[3]
+        name = name.replace('-', ' ')
+        name = name.capitalize()
         chapter = int(url[-1:])
-        print chapter
+        path = str(path) + '\\' + '%s - chapter %d' % (name, chapter)
+        recognise_mangareader(url, path)
     elif service == "mangafox":
+        name = url.strip('/').split('/')
+        name = str(name[4])
+        name = name.replace('_', ' ', 1)
+        name = name.capitalize()
         a = re.findall('/c([0-9]+)/', url)
         chapter = a[0]
-        print chapter
-    # path = str(path) + '\\' + '%s - chapter %d' % (name, chapter) # Path to save your animu
-
-    # if service == "mangareader":
-    #     recognise_mangareader(url)
+        chapter = int(chapter)
+        path = str(path) + '\\' + '%s - chapter %d' % (name, chapter)
+        recognise_mangafox(url, path)
+    else:
+        print 'Service not available. Try again'
+        sys.exit()
