@@ -47,6 +47,10 @@ class HelloWindow(QtGui.QMainWindow):
         self.pathLabel.move(100, 100)
         self.pathEdit = QtGui.QFileDialog.getExistingDirectory(self, 'Select Directory')
         self.pathLabel2 = QtGui.QLabel(self.pathEdit)
+        self.path2 = str(self.pathEdit)
+        self.service = QtGui.QComboBox()
+        self.service.addItem('MangaReader')
+        self.service.addItem('MangaFox')
 
         if not self.pathEdit:
             sys.exit(1)
@@ -57,6 +61,7 @@ class HelloWindow(QtGui.QMainWindow):
         grid.addWidget(self.label, 1, 0)
         grid.addWidget(self.linkEdit, 1, 1)
         grid.addWidget(self.linkButton, 1, 2)
+        grid.addWidget(self.service, 1, 3)
         grid.addWidget(self.pathLabel, 2, 0)
         grid.addWidget(self.pathLabel2, 2, 1)
 
@@ -65,7 +70,7 @@ class HelloWindow(QtGui.QMainWindow):
         self.setCentralWidget(centralWidget)
 
         self.setGeometry(300, 300, 600, 100) # position-x, position-y, width, height
-        self.setWindowTitle('Hey Mang! v0.6 BETA') # Title
+        self.setWindowTitle('Hey Mang! v0.7 Beta') # Title
         self.setWindowIcon(QtGui.QIcon(':/img/manga-icon.png')) # Icon
 
     # This is complicated crap
@@ -84,7 +89,6 @@ Future features:
     *Auto-update (only for stable branches)
 
 Future sites:
-    *Mangafox
     *Batoto
     *ExHentai
     *E-Hentai
@@ -122,7 +126,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     def on_link_clicked(self):
         self.a = self.linkEdit.displayText()
-        download_mango2(self.a, self.path2)
+        self.service = self.service.currentText()
+        download_mango2(self.a, self.path2, self.service)
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
