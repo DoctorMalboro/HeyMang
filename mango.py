@@ -83,7 +83,7 @@ def download_mango2(url, path, service):
     elif service == "mangafox":
         name = url.strip('/').split('/')
         name = str(name[4])
-        name = name.replace('_', ' ', 1)
+        name = name.replace('_', ' ')
         name = name.capitalize()
         a = re.findall('/c([0-9]+)/', url)
         chapter = a[0]
