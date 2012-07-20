@@ -72,7 +72,7 @@ def recognise_mangafox(link, path):
 # Main function
 def download_mango2(url, path, service):
     url = str(url)
-    if service == 'mangareader':
+    if service == 'MangaReader':
         name = url.strip('/').split('/')
         name = name[3]
         name = name.replace('-', ' ')
@@ -80,7 +80,7 @@ def download_mango2(url, path, service):
         chapter = int(url[-1:])
         path = str(path) + '\\' + '%s - chapter %d' % (name, chapter)
         recognise_mangareader(url, path)
-    elif service == "mangafox":
+    elif service == 'MangaFox':
         name = url.strip('/').split('/')
         name = str(name[4])
         name = name.replace('_', ' ')
