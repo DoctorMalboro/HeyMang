@@ -51,6 +51,7 @@ class HelloWindow(QtGui.QMainWindow):
         self.service = QtGui.QComboBox()
         self.service.addItem('MangaReader')
         self.service.addItem('MangaFox')
+        self.service.addItem('Batoto')
 
         if not self.pathEdit:
             sys.exit(1)
