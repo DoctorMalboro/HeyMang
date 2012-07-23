@@ -47,3 +47,6 @@ Remember always to check the official git and to update the program as much as y
 * The /g/entlemen who help me to change the name.
 * StackOverflow for answering all of my questions.
 * Everyone who works and contributes to Python.
+
+### License:
+**Hey Mang!** is licensed under [BSD Simplified license](http://opensource.org/licenses/bsd-3-clause).
