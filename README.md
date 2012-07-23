@@ -11,13 +11,14 @@ Hey Mang! is a free, open-source project that allows you to get your manga from 
 * RSS downloads
 * Better image tagging
 * Auto-update (only for stable branches)
+* [See full list](https://github.com/DoctorMalboro/HeyMang/issues/6)
 
 ### Future sites:
 * Mangafox **(Implemented on version 0.7 Beta)**
-* Batoto
+* Batoto **(Implemented on version 0.8 Beta)**
 * ExHentai
 * E-Hentai
-_(More to add, just add an issue)_
+* [See site list](https://github.com/DoctorMalboro/HeyMang/issues/1)
 
 Remember always to check the official git and to update the program as much as you can.
 
