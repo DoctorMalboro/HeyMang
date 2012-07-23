@@ -35,7 +35,7 @@ def pathchange(old, new):
         Usage: pathchange(os.getcwd(), '/My/Working/Directory')
         Added in version: 0.3 Beta
     """
-    if sys.platform.startswith('win')
+    if sys.platform.startswith('win'):
         if not(os.path.exists(new)):
             os.mkdir(new)
         os.chdir(new)
