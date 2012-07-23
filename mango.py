@@ -61,7 +61,7 @@ def download_mango(url, path):
             imgData = urllib2.urlopen(imgUrl).read()
             fileName = basename(urlsplit(imgUrl)[2])
             output = open(fileName, 'wb')
-            output.write(imgData
+            output.write(imgData)
             output.close()
         except IOError: 
             print "File not found or full disk. Try again."
