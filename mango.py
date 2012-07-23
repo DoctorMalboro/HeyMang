@@ -1,13 +1,40 @@
-import os # Global OS variables
-import sys # System arguments and variables
-import urllib2 # Opening of links
-import re # Regex reader
-from bs4 import BeautifulSoup # HTML parser
-from os.path import basename # Filename base name
-from urlparse import urlsplit # Link splitter (ninja-style)
+"""
+====================================
+====================================
+============ Hey Mang! =============
+====================================
+====================================
+===== Created by DoctorMalboro =====
+====================================
+====================================
+============= License: =============
+====================================
+====================================
+====== BSD Simplified License ======
+====================================
+====================================
+=========== Repository: ============
+====================================
+====================================
+=== github/DoctorMalboro/HeyMang ===
+====================================
+====================================
+"""
 
-# Path Changer Function
+import os 
+import sys
+import urllib2
+import re
+from bs4 import BeautifulSoup
+from os.path import basename
+from urlparse import urlsplit
+
 def pathchange(old, new):
+    """
+        Function: patchange(old, new)
+        Usage: pathchange(os.getcwd(), '/My/Working/Directory')
+        Added in version: 0.3 Beta
+    """
     if sys.platform.startswith('win')
         if not(os.path.exists(new)):
             os.mkdir(new)
@@ -17,23 +44,26 @@ def pathchange(old, new):
             os.mkdir(new)
         os.fchdir(new)
 
-# Download function
 def download_mango(url, path):   
-
+    """
+        Function: download_mango(url, path)
+        Usage: download_mango(http://www.mangareader.net/poyopoyo-kansatsu-nikki/1, os.getcwd())
+        Added in version: 0.1 Beta
+    """
     if path != os.getcwd():
-        pathchange(os.getcwd(), path) # We change the path of the image to be saved
-    urlContent = urllib2.urlopen(url).read() # We read the URL
-    imgUrls = re.findall('img .*?src="(.*?.jpg)"', urlContent) # We read the mango
+        pathchange(os.getcwd(), path)
+    urlContent = urllib2.urlopen(url).read()
+    imgUrls = re.findall('img .*?src="(.*?.jpg)"', urlContent)
 
 
     for imgUrl in imgUrls:
         try:
-            imgData = urllib2.urlopen(imgUrl).read() # We open the image and read it
-            fileName = basename(urlsplit(imgUrl)[2]) # We split the name and create the file
-            output = open(fileName, 'wb') # We open it
-            output.write(imgData) # We save it
-            output.close() # We close it!
-        except IOError: # No file? No disk? Okay, check that out
+            imgData = urllib2.urlopen(imgUrl).read()
+            fileName = basename(urlsplit(imgUrl)[2])
+            output = open(fileName, 'wb')
+            output.write(imgData
+            output.close()
+        except IOError: 
             print "File not found or full disk. Try again."
             sys.exit(1)
         except KeyboardInterrupt:
@@ -44,18 +74,28 @@ def download_mango(url, path):
             sys.exit(1)
 
 def recognise_mangareader(link, path):
-    page = urllib2.urlopen(link).read() # We read the page
-    soup = BeautifulSoup(page) # And we add it to the soup!
+    """
+        Function: recognise_mangareader(link, path)
+        Usage: recognise_mangareader('http://www.mangareader.net/poyopoyo-kansatsu-nikki/1', os.getcwd())
+        Added in version: 0.4 Beta
+    """
+    page = urllib2.urlopen(link).read()
+    soup = BeautifulSoup(page)
 
-    link = link + '/' # Little something to start downloading the pages!
+    link = link + '/'
     
-    soup = soup.findAll('option') # We select all the option tags
-    for l in soup: # And we start with a loop
+    soup = soup.findAll('option') 
+    for l in soup:
         l = l.get_text()
         url2 = link + str(l)
         download_mango(url2, path)
 
 def recognise_mangafox(link, path):
+    """
+        Function: recognise_mangafox(link, path)
+        Usage: recognise_mangafox('http://mangafox.me/manga/tari_tari/c001/1.html', os.getcwd())
+        Added in version: 0.7 Beta
+    """
     url = str(link)
     url2 = re.findall('/([0-9]+).html', url)
     page = urllib2.urlopen(url).read()
@@ -73,6 +113,11 @@ def recognise_mangafox(link, path):
         download_mango(d, path)
 
 def recognise_batoto(link, path):
+    """
+        Function: recognise_batoto(link, path)
+        Usage: recognise_batoto('http://www.batoto.net/read/_/83396/k-on_v1_by_houkago-translations', os.getcwd())
+        Added in version: 0.8 Beta
+    """
     url = str(link)
     page = urllib2.urlopen(url).read()
 
@@ -86,8 +131,12 @@ def recognise_batoto(link, path):
         download_mango(d, path)
 
 
-# Main function
 def download_mango2(url, path, service):
+    """
+        Function: download_mango2(url, path, service)
+        Usage: download_mango2('http://www.batoto.net/read/_/83396/k-on_v1_by_houkago-translations', os.getcwd(), 'Batoto')
+        Added in version: 0.6 Beta
+    """
     url = str(url)
     if service == 'MangaReader':
         name = url.strip('/').split('/')
