@@ -20,6 +20,25 @@ Hey Mang! is a free, open-source project that allows you to get your manga from 
 * E-Hentai
 * [See site list](https://github.com/DoctorMalboro/HeyMang/issues/1)
 
+### Installation:
+
+Read the [requirements](https://github.com/DoctorMalboro/HeyMang/wiki/Requirements) first, it'll tell you what you need to install to make this work. Then you just clone the files with a simple:
+
+	git clone git://github.com/DoctorMalboro/HeyMang.git
+
+And you can execute it with the python command line (Read the [function list](https://github.com/DoctorMalboro/HeyMang/wiki/The-Function-List)) like this:
+
+	> python
+	> import os
+	> from mango import download_mango
+	> download_mango(link, os.getcwd()) # You can change this, obviously
+
+Or with the **Hey Mang!** interface, like this:
+
+	> python programa.py
+
+And then choose the folder where you want to save your manga, paste the link, select the option and start downloading!
+
 Remember always to check the official git and to update the program as much as you can.
 
 ### Many thanks to:
