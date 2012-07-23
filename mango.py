@@ -18,7 +18,7 @@ def download_mango(url, path):
     if path != os.getcwd():
         pathchange(os.getcwd(), path) # We change the path of the image to be saved
     urlContent = urllib2.urlopen(url).read() # We read the URL
-    imgUrls = re.findall('img .*?src="(.*?)"', urlContent) # We read the mango
+    imgUrls = re.findall('img .*?src="(.*?).jpg"', urlContent) # We read the mango
     
 
     # And we open the loop...
@@ -67,6 +67,19 @@ def recognise_mangafox(link, path):
         d = re.sub('\d+.html', str(c), url)
         d = d + '.html'
         download_mango(d, path)
+
+def recognise_batoto(link, path):
+    url = str(link)
+    page = urllib2.urlopen(url).read()
+
+    soup = BeautifulSoup(page)
+
+    soup = soup.find_all(id='page_select')
+    soup = soup[0].get_text()
+    b = re.findall(r'\d+', soup)
+    for c in b:
+        d = url + '/' + c
+        download_mango(d, path)
     
 
 # Main function
@@ -90,6 +103,11 @@ def download_mango2(url, path, service):
         chapter = int(chapter)
         path = str(path) + '\\' + '%s - chapter %d' % (name, chapter)
         recognise_mangafox(url, path)
+    elif service == 'Batoto':
+        name = url.strip('/').split('/')
+        name = name.replace('-', ' ')
+        name = name.capitalize()
+        path = str(path) + '\\' + '%s' % name
     else:
         print 'Service not available. Try again'
         sys.exit()
