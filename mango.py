@@ -47,7 +47,7 @@ def pathchange(old, new):
 def download_mango(url, path):   
     """
         Function: download_mango(url, path)
-        Usage: download_mango(http://www.mangareader.net/poyopoyo-kansatsu-nikki/1, os.getcwd())
+        Usage: download_mango('http://www.mangareader.net/poyopoyo-kansatsu-nikki/1', os.getcwd())
         Added in version: 0.1 Beta
     """
     if path != os.getcwd():
