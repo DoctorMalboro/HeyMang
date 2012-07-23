@@ -8,9 +8,14 @@ from urlparse import urlsplit # Link splitter (ninja-style)
 
 # Path Changer Function
 def pathchange(old, new):
-    if not(os.path.exists(new)):
-        os.mkdir(new)
-    os.chdir(new)
+    if sys.platform.startswith('win')
+        if not(os.path.exists(new)):
+            os.mkdir(new)
+        os.chdir(new)
+    elif sys.platform.startswith('linux'):
+        if not(os.path.exists(new)):
+            os.mkdir(new)
+        os.fchdir(new)
 
 # Download function
 def download_mango(url, path):   
@@ -18,10 +23,9 @@ def download_mango(url, path):
     if path != os.getcwd():
         pathchange(os.getcwd(), path) # We change the path of the image to be saved
     urlContent = urllib2.urlopen(url).read() # We read the URL
-    imgUrls = re.findall('img .*?src="(.*?).jpg"', urlContent) # We read the mango
-    
+    imgUrls = re.findall('img .*?src="(.*?.jpg)"', urlContent) # We read the mango
 
-    # And we open the loop...
+
     for imgUrl in imgUrls:
         try:
             imgData = urllib2.urlopen(imgUrl).read() # We open the image and read it
@@ -80,7 +84,7 @@ def recognise_batoto(link, path):
     for c in b:
         d = url + '/' + c
         download_mango(d, path)
-    
+
 
 # Main function
 def download_mango2(url, path, service):
@@ -105,9 +109,12 @@ def download_mango2(url, path, service):
         recognise_mangafox(url, path)
     elif service == 'Batoto':
         name = url.strip('/').split('/')
-        name = name.replace('-', ' ')
-        name = name.capitalize()
-        path = str(path) + '\\' + '%s' % name
+        name = name[-1:]
+        for s in name:
+            s = s.replace('_', ' ')
+            s = s.capitalize()
+            path = str(path) + '\\' + '%s' % s
+            recognise_batoto(url, path)
     else:
         print 'Service not available. Try again'
         sys.exit()
