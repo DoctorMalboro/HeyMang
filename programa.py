@@ -52,6 +52,7 @@ class HelloWindow(QtGui.QMainWindow):
         self.service.addItem('MangaReader')
         self.service.addItem('MangaFox')
         self.service.addItem('Batoto')
+        self.service.addItem('E-Hentai')
 
         if not self.pathEdit:
             sys.exit(1)
@@ -71,7 +72,7 @@ class HelloWindow(QtGui.QMainWindow):
         self.setCentralWidget(centralWidget)
 
         self.setGeometry(300, 300, 600, 100) # position-x, position-y, width, height
-        self.setWindowTitle('Hey Mang! v0.8 Beta') # Title
+        self.setWindowTitle('Hey Mang! v0.9 Beta') # Title
         self.setWindowIcon(QtGui.QIcon(':/img/manga-icon.png')) # Icon
 
     # This is complicated crap
@@ -91,7 +92,6 @@ Future features:
 
 Future sites:
     *ExHentai
-    *E-Hentai
 
 Remember always to check the official git and to update the program as much as you can. Fork, pull requests and issue bugs, that always helps.
 
