@@ -131,6 +131,58 @@ def recognise_batoto(link, path):
         download_mango(d, path)
 
 
+def download_eHentai(link, path):
+
+    if path != os.getcwd():
+        pathchange(os.getcwd(), path)
+
+    url = str(link)
+    url = urllib2.urlopen(url).read()
+
+    soup = BeautifulSoup(url)
+
+    soup = soup.find_all('img')
+    soup = soup[4].get('src')
+    filename = basename(urlsplit(link)[2] + '.jpg')
+    image = urllib2.urlopen(soup).read()
+    output = open(filename, 'wb')
+    output.write(image)
+    output.close()
+
+
+def recognise_eHentai(link, path):
+    url = str(link)
+    page = urllib2.urlopen(url).read()
+    soup = BeautifulSoup(page)
+    name = soup.findAll('title')
+    name = name[0].get_text().encode('utf-8')
+    name = str(name)
+    path = path + '\\' + name
+    download_eHentai(link, path)
+
+    pages = soup.find_all('span')
+    pages = pages[1].get_text()
+    pages = int(pages)
+    z = 0
+
+    while (pages > z):
+        z = z + 1
+        sopa = soup.find('div', 'sn')
+        sopa = sopa.find_all('a')
+        sopa = sopa[2].get('href')
+
+        url = str(sopa)
+        download_eHentai(url, path)
+        page = urllib2.urlopen(url).read()
+
+        soup = BeautifulSoup(page)
+
+        sopa = soup.find('div', 'sn')
+        sopa = sopa.find_all('a')
+        sopa = sopa[2].get('href')
+        download_eHentai(sopa, path)
+
+
 def download_mango2(url, path, service):
     """
         Function: download_mango2(url, path, service)
@@ -164,6 +216,8 @@ def download_mango2(url, path, service):
             s = s.capitalize()
             path = str(path) + '\\' + '%s' % s
             recognise_batoto(url, path)
+    elif service == 'E-Hentai':
+        recognise_eHentai(url, path)
     else:
         print 'Service not available. Try again'
         sys.exit()
