@@ -11,13 +11,33 @@ Hey Mang! is a free, open-source project that allows you to get your manga from 
 * RSS downloads
 * Better image tagging
 * Auto-update (only for stable branches)
+* [See full list](https://github.com/DoctorMalboro/HeyMang/issues/6)
 
 ### Future sites:
 * Mangafox **(Implemented on version 0.7 Beta)**
-* Batoto
+* Batoto **(Implemented on version 0.8 Beta)**
 * ExHentai
 * E-Hentai
-_(More to add, just add an issue)_
+* [See site list](https://github.com/DoctorMalboro/HeyMang/issues/1)
+
+### Installation:
+
+Read the [requirements](https://github.com/DoctorMalboro/HeyMang/wiki/Requirements) first, it'll tell you what you need to install to make this work. Then you just clone the files with a simple:
+
+	git clone git://github.com/DoctorMalboro/HeyMang.git
+
+And you can execute it with the python command line (Read the [function list](https://github.com/DoctorMalboro/HeyMang/wiki/The-Function-List)) like this:
+
+	> python
+	> import os
+	> from mango import download_mango
+	> download_mango(link, os.getcwd()) # You can change this, obviously
+
+Or with the **Hey Mang!** interface, like this:
+
+	> python programa.py
+
+And then choose the folder where you want to save your manga, paste the link, select the option and start downloading!
 
 Remember always to check the official git and to update the program as much as you can.
 
@@ -27,3 +47,6 @@ Remember always to check the official git and to update the program as much as y
 * The /g/entlemen who help me to change the name.
 * StackOverflow for answering all of my questions.
 * Everyone who works and contributes to Python.
+
+### License:
+**Hey Mang!** is licensed under [BSD Simplified license](http://opensource.org/licenses/bsd-3-clause).

@@ -51,6 +51,7 @@ class HelloWindow(QtGui.QMainWindow):
         self.service = QtGui.QComboBox()
         self.service.addItem('MangaReader')
         self.service.addItem('MangaFox')
+        self.service.addItem('Batoto')
 
         if not self.pathEdit:
             sys.exit(1)
@@ -70,7 +71,7 @@ class HelloWindow(QtGui.QMainWindow):
         self.setCentralWidget(centralWidget)
 
         self.setGeometry(300, 300, 600, 100) # position-x, position-y, width, height
-        self.setWindowTitle('Hey Mang! v0.7 Beta') # Title
+        self.setWindowTitle('Hey Mang! v0.8 Beta') # Title
         self.setWindowIcon(QtGui.QIcon(':/img/manga-icon.png')) # Icon
 
     # This is complicated crap
@@ -89,7 +90,6 @@ Future features:
     *Auto-update (only for stable branches)
 
 Future sites:
-    *Batoto
     *ExHentai
     *E-Hentai
 
