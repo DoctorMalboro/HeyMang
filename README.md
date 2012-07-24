@@ -17,7 +17,7 @@ Hey Mang! is a free, open-source project that allows you to get your manga from 
 * Mangafox **(Implemented on version 0.7 Beta)**
 * Batoto **(Implemented on version 0.8 Beta)**
 * ExHentai
-* E-Hentai
+* E-Hentai **(Implemented on version 0.9 Beta)**
 * [See site list](https://github.com/DoctorMalboro/HeyMang/issues/1)
 
 ### Installation:
