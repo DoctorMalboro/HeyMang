@@ -2,6 +2,7 @@ import PyQt4
 import sys
 import mango
 import images_rc
+from feed import rss_feed
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from mango import download_mango2
@@ -20,6 +21,10 @@ class HelloWindow(QtGui.QMainWindow):
         changePath = QtGui.QAction(QtGui.QIcon(':/img/folder-icon.png'), '&Change folder', self)
         changePath.setShortcut('Ctrl+P')
         changePath.triggered.connect(self.browseDir)
+        # RSS download option
+        RSSDownload = QtGui.QAction(QtGui.QIcon(':/img/rss-icon.png'), '&RSS Downloader', self)
+        RSSDownload.setShortcut('Ctrl+R')
+        RSSDownload.triggered.connect(self.RssDownloader)
         # Exit option
         exitOption = QtGui.QAction(QtGui.QIcon(':/img/exit-icon.png'), '&Exit', self)
         exitOption.setShortcut('Ctrl+Q')
@@ -36,6 +41,7 @@ class HelloWindow(QtGui.QMainWindow):
         fileMenu = menubar.addMenu('&File')
         helpMenu = menubar.addMenu('&Help')
         fileMenu.addAction(changePath)
+        fileMenu.addAction(RSSDownload)
         fileMenu.addAction(exitOption)
         helpMenu.addAction(aboutOption)
         helpMenu.addAction(licenseOption)
@@ -75,10 +81,22 @@ class HelloWindow(QtGui.QMainWindow):
         self.setWindowTitle('Hey Mang! v0.9 Beta') # Title
         self.setWindowIcon(QtGui.QIcon(':/img/manga-icon.png')) # Icon
 
-    # This is complicated crap
     def browseDir(self):
-        dirMessage = QtGui.QMessageBox(self)
-        dirMessage.information(self, 'Pending', 'This feature\'s still in development. Sorry for any inconvenience.')
+        directory = QtGui.QFileDialog.getExistingDirectory(self, 'Select a new directory')
+        self.pathEdit.replace(self.pathEdit, directory)
+        self.pathLabel2.setText(directory)
+
+    def RssDownloader(self):
+        link = QtGui.QInputDialog.getText(self, 'Input Dialog', 'RSS feed link:')
+
+        if link[0]:
+            c = str(link[0])
+            a = QtGui.QMessageBox(self)
+            a.setWindowTitle('The link')
+            rss_feed(c, self.path2)
+            a.setText('Downloading your shit')
+            a.setGeometry(450, 300, 200, 150)
+            a.show()
 
     # My idea and how I will develop it
     def aboutManget(self):
