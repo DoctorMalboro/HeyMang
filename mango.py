@@ -46,7 +46,8 @@ def pathchange(old, new):
 
 def check_version(link, version):
     a = urllib2.urlopen(link).read()
-    if a == version:
+    b = str(version)
+    if a == b:
         return 'Updated'
     else:
         return 'Outdated'
