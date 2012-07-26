@@ -19,9 +19,9 @@ Hey Mang! is a free, open-source project that allows you to get your manga from 
 * E-Hentai **(Implemented on version 0.9 Beta)**
 * [See full list](https://github.com/DoctorMalboro/HeyMang/issues/1)
 
-### Installation:
+### Deployment:
 
-Read the [requirements](https://github.com/DoctorMalboro/HeyMang/wiki/Requirements) first, it'll tell you what you need to install to make this work. Then you just clone the files with a simple:
+Want to test and fork this on your own environment? Read the [requirements](https://github.com/DoctorMalboro/HeyMang/wiki/Requirements) first, it'll tell you what you need to install to make this work. Then you just clone the files with a simple:
 
 	git clone git://github.com/DoctorMalboro/HeyMang.git
 
