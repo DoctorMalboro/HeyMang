@@ -44,8 +44,12 @@ def pathchange(old, new):
             os.mkdir(new)
         os.fchdir(new)
 
-def version_check(version):
-    
+def check_version(link, version):
+    a = urllib2.urlopen(link).read()
+    if a == version:
+        return 'Updated'
+    else:
+        return 'Outdated'
 
 def download_mango(url, path):   
     """
