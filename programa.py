@@ -92,7 +92,7 @@ class HelloWindow(QtGui.QMainWindow):
         self.pathLabel2.setText(directory)
 
     def RssDownloader(self):
-        link = QtGui.QInputDialog.getText(self, 'Input Dialog', 'RSS feed link:')
+        link = QtGui.QInputDialog.getText(self, 'MangaFox only', 'RSS feed link:')
 
         if link[0]:
             c = str(link[0])
@@ -100,7 +100,6 @@ class HelloWindow(QtGui.QMainWindow):
             a.setWindowTitle('The link')
             rss_feed(c, self.path2)
             a.setText('Downloading your shit')
-            a.setGeometry(450, 300, 200, 150)
             a.show()
 
     def aboutManget(self):
@@ -148,7 +147,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     def checkVersion(self):
         version = QtGui.QMessageBox(self)
         version.setWindowTitle('Hey Mang! Version')
-        if check_version('https://raw.github.com/DoctorMalboro/HeyMang/dev-0.9/version.txt', CURRENT_VERSION) == 'Updated':
+        if check_version('https://raw.github.com/DoctorMalboro/HeyMang/master/version.txt', CURRENT_VERSION) == 'Updated':
             version.setText('Hey Mang! is up-to-date.')
             version.show()
         else:
@@ -157,8 +156,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     def on_link_clicked(self):
         self.a = self.linkEdit.displayText()
-        self.service = self.service.currentText()
-        download_mango2(self.a, self.path2, self.service)
+        self.service2 = self.service.currentIndex()
+        self.service2 = int(self.service2)
+        download_mango2(self.a, self.path2, self.service2)
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
