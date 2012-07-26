@@ -36,6 +36,9 @@ class HelloWindow(QtGui.QMainWindow):
         # License option
         licenseOption = QtGui.QAction(QtGui.QIcon(':/img/license-icon.png'), '&Hey Mang! License', self)
         licenseOption.triggered.connect(self.MangetLicense)
+        # Version option
+        VersionOption = QtGui.QAction(QtGui.QIcon(':/img/manga-icon.png'), '&Hey Mang! version', self)
+        VersionOption.triggered.connect(self.checkVersion)
 
         # Setting the menubar
         menubar = self.menuBar()
@@ -46,6 +49,7 @@ class HelloWindow(QtGui.QMainWindow):
         fileMenu.addAction(exitOption)
         helpMenu.addAction(aboutOption)
         helpMenu.addAction(licenseOption)
+        helpMenu.addAction(VersionOption)
 
         self.label = QtGui.QLabel('Manga link:')
         self.linkEdit = QtGui.QLineEdit()
@@ -144,12 +148,12 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     def checkVersion(self):
         version = QtGui.QMessageBox(self)
         version.setWindowTitle('Hey Mang! Version')
-        check_version('', CURRENT_VERSION)
-        if check_version == 'Outdated':
+        if check_version('https://raw.github.com/DoctorMalboro/HeyMang/dev-0.9/version.txt', CURRENT_VERSION) == 'Updated':
             version.setText('Hey Mang! is up-to-date.')
             version.show()
         else:
             version.setText('Your Hey Mang! version is outdated. Please update it inmediately.')
+            version.show()
 
     def on_link_clicked(self):
         self.a = self.linkEdit.displayText()
