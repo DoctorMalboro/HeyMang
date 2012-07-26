@@ -8,21 +8,20 @@ Hey Mang! is a free, open-source project that allows you to get your manga from 
 ![HeyMang!](https://github.com/DoctorMalboro/HeyMang/raw/master/HeyMang-preview.png "Hey Mang!")
 
 ### Future features:
-* RSS downloads
-* Better image tagging
-* Auto-update (only for stable branches)
+* RSS downloads **(Implemented in version 0.9 Beta)**
+* Update checker **(Implemented in version 0.9 Beta)**
 * [See full list](https://github.com/DoctorMalboro/HeyMang/issues/6)
 
 ### Future sites:
 * Mangafox **(Implemented on version 0.7 Beta)**
 * Batoto **(Implemented on version 0.8 Beta)**
 * ExHentai
-* E-Hentai
-* [See site list](https://github.com/DoctorMalboro/HeyMang/issues/1)
+* E-Hentai **(Implemented on version 0.9 Beta)**
+* [See full list](https://github.com/DoctorMalboro/HeyMang/issues/1)
 
-### Installation:
+### Deployment:
 
-Read the [requirements](https://github.com/DoctorMalboro/HeyMang/wiki/Requirements) first, it'll tell you what you need to install to make this work. Then you just clone the files with a simple:
+Want to test and fork this on your own environment? Read the [requirements](https://github.com/DoctorMalboro/HeyMang/wiki/Requirements) first, it'll tell you what you need to install to make this work. Then you just clone the files with a simple:
 
 	git clone git://github.com/DoctorMalboro/HeyMang.git
 

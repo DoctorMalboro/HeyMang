@@ -2,10 +2,12 @@ import PyQt4
 import sys
 import mango
 import images_rc
+from feed import rss_feed
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-from mango import download_mango2
+from mango import download_mango2, check_version
 
+CURRENT_VERSION = '0.9 Beta'
 
 class HelloWindow(QtGui.QMainWindow):
 
@@ -20,6 +22,10 @@ class HelloWindow(QtGui.QMainWindow):
         changePath = QtGui.QAction(QtGui.QIcon(':/img/folder-icon.png'), '&Change folder', self)
         changePath.setShortcut('Ctrl+P')
         changePath.triggered.connect(self.browseDir)
+        # RSS download option
+        RSSDownload = QtGui.QAction(QtGui.QIcon(':/img/RSS-icon.png'), '&RSS Downloader', self)
+        RSSDownload.setShortcut('Ctrl+R')
+        RSSDownload.triggered.connect(self.RssDownloader)
         # Exit option
         exitOption = QtGui.QAction(QtGui.QIcon(':/img/exit-icon.png'), '&Exit', self)
         exitOption.setShortcut('Ctrl+Q')
@@ -30,15 +36,20 @@ class HelloWindow(QtGui.QMainWindow):
         # License option
         licenseOption = QtGui.QAction(QtGui.QIcon(':/img/license-icon.png'), '&Hey Mang! License', self)
         licenseOption.triggered.connect(self.MangetLicense)
+        # Version option
+        VersionOption = QtGui.QAction(QtGui.QIcon(':/img/manga-icon.png'), '&Hey Mang! version', self)
+        VersionOption.triggered.connect(self.checkVersion)
 
         # Setting the menubar
         menubar = self.menuBar()
         fileMenu = menubar.addMenu('&File')
         helpMenu = menubar.addMenu('&Help')
         fileMenu.addAction(changePath)
+        fileMenu.addAction(RSSDownload)
         fileMenu.addAction(exitOption)
         helpMenu.addAction(aboutOption)
         helpMenu.addAction(licenseOption)
+        helpMenu.addAction(VersionOption)
 
         self.label = QtGui.QLabel('Manga link:')
         self.linkEdit = QtGui.QLineEdit()
@@ -52,6 +63,7 @@ class HelloWindow(QtGui.QMainWindow):
         self.service.addItem('MangaReader')
         self.service.addItem('MangaFox')
         self.service.addItem('Batoto')
+        self.service.addItem('E-Hentai')
 
         if not self.pathEdit:
             sys.exit(1)
@@ -71,15 +83,25 @@ class HelloWindow(QtGui.QMainWindow):
         self.setCentralWidget(centralWidget)
 
         self.setGeometry(300, 300, 600, 100) # position-x, position-y, width, height
-        self.setWindowTitle('Hey Mang! v0.8 Beta') # Title
+        self.setWindowTitle('Hey Mang! v%s' % CURRENT_VERSION) # Title
         self.setWindowIcon(QtGui.QIcon(':/img/manga-icon.png')) # Icon
 
-    # This is complicated crap
     def browseDir(self):
-        dirMessage = QtGui.QMessageBox(self)
-        dirMessage.information(self, 'Pending', 'This feature\'s still in development. Sorry for any inconvenience.')
+        directory = QtGui.QFileDialog.getExistingDirectory(self, 'Select a new directory')
+        self.pathEdit.replace(self.pathEdit, directory)
+        self.pathLabel2.setText(directory)
 
-    # My idea and how I will develop it
+    def RssDownloader(self):
+        link = QtGui.QInputDialog.getText(self, 'MangaFox only', 'RSS feed link:')
+
+        if link[0]:
+            c = str(link[0])
+            a = QtGui.QMessageBox(self)
+            a.setWindowTitle('The link')
+            rss_feed(c, self.path2)
+            a.setText('Downloading your shit')
+            a.show()
+
     def aboutManget(self):
         about = QtGui.QMessageBox(self)
         about.about(self, 'About Hey Mang!', """Hey Mang! is a free, open-source project that allows you to get your manga from your favourite sites. Right now is at beta stage and so many features are not yet implemented and many sites have not been covered yet.
@@ -91,7 +113,6 @@ Future features:
 
 Future sites:
     *ExHentai
-    *E-Hentai
 
 Remember always to check the official git and to update the program as much as you can. Fork, pull requests and issue bugs, that always helps.
 
@@ -102,7 +123,6 @@ Many thanks to:
     *StackOverflow for answering all of my questions.
     *Everyone who works and contributes to Python, a beautiful and excellent language!""")
 
-    # Free as in BSD free
     def MangetLicense(self):
         license = QtGui.QMessageBox(self)
         license.setWindowTitle('Hey Mang! License')
@@ -124,10 +144,21 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         license.sizeHint()
         license.show()
 
+    def checkVersion(self):
+        version = QtGui.QMessageBox(self)
+        version.setWindowTitle('Hey Mang! Version')
+        if check_version('https://raw.github.com/DoctorMalboro/HeyMang/master/version.txt', CURRENT_VERSION) == 'Updated':
+            version.setText('Hey Mang! is up-to-date.')
+            version.show()
+        else:
+            version.setText('Your Hey Mang! version is outdated. Please update it inmediately.')
+            version.show()
+
     def on_link_clicked(self):
         self.a = self.linkEdit.displayText()
-        self.service = self.service.currentText()
-        download_mango2(self.a, self.path2, self.service)
+        self.service2 = self.service.currentIndex()
+        self.service2 = int(self.service2)
+        download_mango2(self.a, self.path2, self.service2)
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
