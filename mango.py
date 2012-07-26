@@ -198,7 +198,7 @@ def download_mango2(url, path, service):
         Added in version: 0.6 Beta
     """
     url = str(url)
-    if service == 'MangaReader':
+    if service == 0:
         name = url.strip('/').split('/')
         name = name[3]
         name = name.replace('-', ' ')
@@ -206,7 +206,7 @@ def download_mango2(url, path, service):
         chapter = int(url[-1:])
         path = str(path) + '\\' + '%s - chapter %d' % (name, chapter)
         recognise_mangareader(url, path)
-    elif service == 'MangaFox':
+    elif service == 1:
         name = url.strip('/').split('/')
         name = str(name[4])
         name = name.replace('_', ' ')
@@ -216,7 +216,7 @@ def download_mango2(url, path, service):
         chapter = int(chapter)
         path = str(path) + '\\' + '%s - chapter %d' % (name, chapter)
         recognise_mangafox(url, path)
-    elif service == 'Batoto':
+    elif service == 2:
         name = url.strip('/').split('/')
         name = name[-1:]
         for s in name:
@@ -224,7 +224,7 @@ def download_mango2(url, path, service):
             s = s.capitalize()
             path = str(path) + '\\' + '%s' % s
             recognise_batoto(url, path)
-    elif service == 'E-Hentai':
+    elif service == 3:
         recognise_eHentai(url, path)
     else:
         print 'Service not available. Try again'
