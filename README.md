@@ -8,9 +8,8 @@ Hey Mang! is a free, open-source project that allows you to get your manga from 
 ![HeyMang!](https://github.com/DoctorMalboro/HeyMang/raw/master/HeyMang-preview.png "Hey Mang!")
 
 ### Future features:
-* RSS downloads
-* Better image tagging
-* Auto-update (only for stable branches)
+* RSS downloads **(Implemented in version 0.9 Beta)**
+* Update checker **(Implemented in version 0.9 Beta)**
 * [See full list](https://github.com/DoctorMalboro/HeyMang/issues/6)
 
 ### Future sites:
@@ -18,7 +17,7 @@ Hey Mang! is a free, open-source project that allows you to get your manga from 
 * Batoto **(Implemented on version 0.8 Beta)**
 * ExHentai
 * E-Hentai **(Implemented on version 0.9 Beta)**
-* [See site list](https://github.com/DoctorMalboro/HeyMang/issues/1)
+* [See full list](https://github.com/DoctorMalboro/HeyMang/issues/1)
 
 ### Installation:
 
