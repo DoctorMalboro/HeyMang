@@ -7,7 +7,7 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 from mango import download_mango2, check_version
 
-CURRENT_VERSION = '0.9 Beta'
+CURRENT_VERSION = '1.0 Stable'
 
 class HelloWindow(QtGui.QMainWindow):
 
@@ -107,12 +107,12 @@ class HelloWindow(QtGui.QMainWindow):
         about.about(self, 'About Hey Mang!', """Hey Mang! is a free, open-source project that allows you to get your manga from your favourite sites. Right now is at beta stage and so many features are not yet implemented and many sites have not been covered yet.
 
 Future features:
-    *RSS downloads
-    *Better image tagging
-    *Auto-update (only for stable branches)
+    * Threading
+    * More sites support
+    * Multiple chapter downloads
 
 Future sites:
-    *ExHentai
+    * None currently
 
 Remember always to check the official git and to update the program as much as you can. Fork, pull requests and issue bugs, that always helps.
 
