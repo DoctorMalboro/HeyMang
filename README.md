@@ -1,24 +1,38 @@
 Hey Mang!
 ======
 
-## The easiest way to download all your mangos ##
+_The easiest way to download all your mangos_
+
+
+## [Windows Download](http://sourceforge.net/projects/heymang/files/Stable-1.0/Hey%20Mang%21_Win32.exe/download) | [Documentation](https://github.com/DoctorMalboro/HeyMang/wiki) | [Bug tracker](https://github.com/DoctorMalboro/HeyMang/issues) | [Support page](https://sourceforge.net/p/heymang/tickets/)
+
+## Introduction
 
 Hey Mang! is a free, open-source project that allows you to get your manga from your favourite sites.
 
-![HeyMang!](https://github.com/DoctorMalboro/HeyMang/raw/master/HeyMang-preview.png "Hey Mang!")
+![HeyMang!](https://github.com/DoctorMalboro/HeyMang/raw/master/screenshots/HeyMang-screenshot02.png)
 
-### Future features:
-* RSS downloads **(Implemented in version 0.9 Beta)**
-* Update checker **(Implemented in version 0.9 Beta)**
-* [See full list](https://github.com/DoctorMalboro/HeyMang/issues/6)
+### 2.0 Future features:
+* Threading
+* More sites support
+* Multiple chapter downloads
+* Fully implemented RSS download
 
 ### Future sites:
-* Mangafox **(Implemented on version 0.7 Beta)**
-* Batoto **(Implemented on version 0.8 Beta)**
-* E-Hentai **(Implemented on version 0.9 Beta)**
-* [See full list](https://github.com/DoctorMalboro/HeyMang/issues/1)
+* TBA
 
-### Deployment:
+## Installation
+
+To install this on windows you only need to use the [windows' installer](http://sourceforge.net/projects/heymang/files/Stable-1.0/Hey%20Mang%21_Win32.exe/download). Linux and other POSIX OS will only need to download the source code and execute it via command line. An example:
+
+	$ tar -xvf DoctorMalboro-HeyMang-a333e24.tar.gz
+	$ uniz DoctorMalboro-HeyMang-a333e24.zip # If you download the .zip file
+	$ chmod +x programa.py
+	$ ./programa.py
+
+And you should have a fully functional **Hey Mang!** working in your POSIX environment.
+
+## Source code deployment:
 
 Want to test and fork this on your own environment? Read the [requirements](https://github.com/DoctorMalboro/HeyMang/wiki/Requirements) first, it'll tell you what you need to install to make this work. Then you just clone the files with a simple:
 
