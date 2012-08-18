@@ -25,6 +25,7 @@ import os
 import sys
 import urllib2
 import re
+import threading
 from bs4 import BeautifulSoup
 from os.path import basename
 from urlparse import urlsplit
@@ -55,7 +56,7 @@ def check_version(link, version):
 def download_mango(url, path):   
     """
         Function: download_mango(url, path)
-        Usage: download_mango('http://www.mangareader.net/poyopoyo-kansatsu-nikki/1', os.getcwd())
+        Usage: download_mango('http://www.mangareader.net/poyopoyo-kansatsu-nikki', os.getcwd())
         Added in version: 0.1 Beta
     """
     if path != os.getcwd():
@@ -84,24 +85,34 @@ def download_mango(url, path):
 def recognise_mangareader(link, path):
     """
         Function: recognise_mangareader(link, path)
-        Usage: recognise_mangareader('http://www.mangareader.net/poyopoyo-kansatsu-nikki/1', os.getcwd())
+        Usage: recognise_mangareader('http://www.mangareader.net/poyopoyo-kansatsu-nikki', os.getcwd())
         Added in version: 0.4 Beta
     """
     page = urllib2.urlopen(link).read()
     soup = BeautifulSoup(page)
 
-    link = link + '/'
-    
-    soup = soup.findAll('option') 
-    for l in soup:
-        l = l.get_text()
-        url2 = link + str(l)
-        download_mango(url2, path)
-
+    soup = soup.findAll(id='listing')
+    for s in soup:
+        s = s.findAll('td')
+        for t in s:
+            t = t.findAll('a')
+            for x in t:
+                 link = 'http://www.mangareader.net' + x.get('href')
+                 link = re.split('\n', link)
+                 for dummy in link:
+                    w = urllib2.urlopen(dummy).read()
+                    soup = BeautifulSoup(w)
+                    soup = soup.findAll('option')
+                    for alpha in soup:
+                        alpha = alpha.get_text()
+                        print alpha
+                        url = dummy + '/' + str(alpha)
+                        download_mango(url, path)
+                 
 def recognise_mangafox(link, path):
     """
         Function: recognise_mangafox(link, path)
-        Usage: recognise_mangafox('http://mangafox.me/manga/tari_tari/c001/1.html', os.getcwd())
+        Usage: recognise_mangafox('http://mangafox.me/manga/tari_tari/', os.getcwd())
         Added in version: 0.7 Beta
     """
     url = str(link)
@@ -110,20 +121,32 @@ def recognise_mangafox(link, path):
 
     soup = BeautifulSoup(page)
 
-    soup = soup.findAll('option')
-    a = max(soup)
-    b = soup.index(a)
-    c = 0
-    while (c < b):
-        c = c + 1
-        d = re.sub('\d+.html', str(c), url)
-        d = d + '.html'
-        download_mango(d, path)
+    catalog = soup.findAll('ul')
+    for content in catalog:
+        content = content.findAll('h3')
+        for links in content:
+            links = links.findAll('a')
+            for extract in links:
+                extract = extract.get('href')
+
+                page = urllib2.urlopen(extract).read()
+
+                soup = BeautifulSoup(page)
+
+                soup = soup.findAll('option')
+                a = max(soup)
+                a = soup.index(a)
+                c = 0
+                while (c < a):
+                    c = c + 1
+                    d = re.sub('\d+.html', '', extract)
+                    d = d + str(c) + '.html'
+                    download_mango(d, path)
 
 def recognise_batoto(link, path):
     """
         Function: recognise_batoto(link, path)
-        Usage: recognise_batoto('http://www.batoto.net/read/_/83396/k-on_v1_by_houkago-translations', os.getcwd())
+        Usage: recognise_batoto('http://www.batoto.net/comic/_/comics/china-girl-r1935', os.getcwd())
         Added in version: 0.8 Beta
     """
     url = str(link)
@@ -131,12 +154,25 @@ def recognise_batoto(link, path):
 
     soup = BeautifulSoup(page)
 
-    soup = soup.find_all(id='page_select')
-    soup = soup[0].get_text()
-    b = re.findall(r'\d+', soup)
-    for c in b:
-        d = url + '/' + c
-        download_mango(d, path)
+    catalog = soup.findAll('table', 'chapters_list')
+    for blocks in catalog:
+        blocks = blocks.findAll('td')
+        for links in blocks:
+            links = links.find_all('a')
+            for mangas in links:
+                if mangas.string == None:
+                    mangas = mangas.get('href')
+
+                    page = urllib2.urlopen(mangas).read()
+
+                    soup = BeautifulSoup(page)
+
+                    soup = soup.find_all(id='page_select')
+                    soup = soup[0].get_text()
+                    b = re.findall(r'\d+', soup)
+                    for c in b:
+                        d = mangas + '/' + c
+                        download_mango(d, path)
 
 
 def download_eHentai(link, path):
